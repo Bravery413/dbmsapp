@@ -268,7 +268,7 @@ public class LoginController {
             html.append("连接数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "sa", "admins");
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
             sql = con.createStatement();
             rs = sql.executeQuery("SELECT * FROM 毕业学分");
             html.append("<center>针对每条记录，按照“课程类别”修改“最低学分”</center><Table border='6' align='center'>");
@@ -367,6 +367,239 @@ public class LoginController {
         m.addAttribute("html", html);
         return "byxf01";
     }
+
+    @GetMapping("/editGrade")
+    public ModelAndView editGrade(ModelAndView m) {
+        System.out.println(111);
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        StringBuffer html = new StringBuffer();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html.append("连接数据库错误-1");
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            sql = con.createStatement();
+            rs = sql.executeQuery("SELECT * FROM 学习成绩");
+            html.append("<center>针对每条记录，按照“学生课程”修改“总评分”</center><Table border='6' align='center'>");
+            String sid = "";
+            String cid = "";
+            String grade = "";
+            while (rs.next()) {
+                sid = rs.getString(1);
+                cid = rs.getString(2);
+                grade = rs.getString(3);
+                html.append("<tr><form id='form1' name='form1' method='post' action='/updateGrade'>" +
+                        "<TD >学号：<label><input name='sid' type='hidden' value='" + sid + "' /></label>" + sid + "</TD>" +
+                        "<TD >课程编号：<label><input name='cid' type='hidden' value='" + cid + "' /></label>" + cid + "</TD>" +
+                        "<TD >总评分：<label><input name='grade1' type='hidden' value='" + grade + "' /></label>" + grade + "</TD>");
+
+                html.append("<TD >总评分：<label><input name='grade' type='text' id='grade' value='" + rs.getString(3) + "' size='20' /></label></TD>");
+                html.append("<TD ><br><label><input type='submit' name='Submit' value='修改总评分并提交' /></label></form></tr>");
+            }
+            html.append("</Table>");
+            con.close();
+        } catch (SQLException e1) {
+            html.append("访问数据库错误-2");
+        }
+        m.addObject("html", html);
+        m.setViewName("updatebyxf021");
+        return m;
+    }
+
+    @PostMapping("/updateGrade")
+    public ModelAndView updateGrade(String sid, String cid, String grade, ModelAndView m) throws SQLException, UnsupportedEncodingException {
+
+        Connection con = null;
+        PreparedStatement preparedStatement;
+        ResultSet rs = null;
+        String html = "";
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html = "连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            String condition = "UPDATE 学习成绩 SET 总评分=? where 学号=? and 课程编号=?";
+            preparedStatement = con.prepareStatement(condition);
+            preparedStatement.setString(1, grade);
+            preparedStatement.setString(2, sid);
+            preparedStatement.setString(3, cid);
+
+            //执行更新操作：
+            preparedStatement.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            html = "访问数据库错误-2";
+        }
+
+        m.addObject("html", html);
+        m.setViewName("redirect:/editGrade");
+        return m;
+    }
+
+    @GetMapping("/editLesson")
+    public ModelAndView editLesson(ModelAndView m) {
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        StringBuffer html = new StringBuffer();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html.append("连接数据库错误-1");
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            sql = con.createStatement();
+            rs = sql.executeQuery("SELECT * FROM 课程");
+            html.append("<center>针对每条记录，按照“课程”修改“课时”</center><Table border='6' align='center'>");
+            String cid = "";
+            String name = "";
+            String time = "";
+            String credit = "";
+            String type = "";
+            while (rs.next()) {
+                cid = rs.getString(1);
+                name = rs.getString(2);
+                time = rs.getString(3);
+                credit = rs.getString(4);
+                type = rs.getString(5);
+                html.append("<tr><form id='form1' name='form1' method='post' action='/updateLesson'>" +
+                        "<TD >课程编号：<label><input name='cid' type='hidden' value='" + cid + "' /></label>" + cid + "</TD>" +
+                        "<TD >课程名称：<label><input name='name' type='hidden' value='" + name + "' /></label>" + name + "</TD>" +
+                        "<TD >课时：<label><input name='time1' type='hidden' value='" + time + "' /></label>" + time + "</TD>" +
+                        "<TD >学分：<label><input name='credit1' type='hidden' value='" + credit + "' /></label>" + credit + "</TD>" +
+                        "<TD >课程类别：<label><input name='type' type='hidden' value='" + type + "' /></label>" + type + "</TD>");
+
+                html.append("<TD >课时：<label><input name='time' type='text' id='time' value='" + time + "' size='20' /></label></TD>");
+                html.append("<TD ><br><label><input type='submit' name='Submit' value='修改课时并提交' /></label></form></tr>");
+            }
+            html.append("</Table>");
+            con.close();
+        } catch (SQLException e1) {
+            html.append("访问数据库错误-2");
+        }
+        m.addObject("html", html);
+        m.setViewName("updatebyxf021");
+        return m;
+    }
+
+    @PostMapping("/updateLesson")
+    public ModelAndView updateLesson(String cid, String time, ModelAndView m) throws SQLException, UnsupportedEncodingException {
+
+        System.out.println(111);
+        Connection con = null;
+        PreparedStatement preparedStatement;
+        ResultSet rs = null;
+        String html = "";
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html = "连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            String condition = "UPDATE 课程 SET 课时=? where 课程编号=?";
+            preparedStatement = con.prepareStatement(condition);
+            preparedStatement.setString(1, time);
+            preparedStatement.setString(2, cid);
+            //执行更新操作：
+            preparedStatement.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            html = "访问数据库错误-2";
+        }
+
+        m.addObject("html", html);
+        m.setViewName("redirect:/editLesson");
+        return m;
+    }
+
+
+    @GetMapping("/editStudent")
+    public ModelAndView editStudent(ModelAndView m) {
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        StringBuffer html = new StringBuffer();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html.append("连接数据库错误-1");
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            sql = con.createStatement();
+            rs = sql.executeQuery("SELECT * FROM 学生");
+            html.append("<center>针对每条记录，按照“课程”修改“课时”</center><Table border='6' align='center'>");
+
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String name = rs.getString(2);
+                String sex = rs.getString(3);
+                String date = rs.getString(4);
+                String type = rs.getString(5);
+                String home = rs.getString(6);
+                String schoolClass = rs.getString(7);
+
+                html.append("<tr><form id='form1' name='form1' method='post' action='/updateStudent'>" +
+                        "<TD >学号：<label><input name='id' type='hidden' value='" + id + "' /></label>" + id + "</TD>" +
+                        "<TD >姓名：<label><input name='name' type='hidden' value='" + name + "' /></label>" + name + "</TD>" +
+                        "<TD >性别：<label><input name='sex' type='hidden' value='" + sex + "' /></label>" + sex + "</TD>" +
+                        "<TD >出生日期：<label><input name='date' type='hidden' value='" + date + "' /></label>" + date + "</TD>" +
+                        "<TD >籍贯：<label><input name='type' type='hidden' value='" + type + "' /></label>" + type + "</TD>" +
+                        "<TD >家庭住址：<label><input name='home' type='hidden' value='" + home + "' /></label>" + home + "</TD>" +
+                        "<TD >班级：<label><input name='schoolClass1' type='hidden' value='" + schoolClass + "' /></label>" + schoolClass + "</TD>");
+
+                html.append("<TD >班级：<label><input name='schoolClass' type='text' id='time' value='" + schoolClass + "' size='20' /></label></TD>");
+                html.append("<TD ><br><label><input type='submit' name='Submit' value='修改课时并提交' /></label></form></tr>");
+            }
+            html.append("</Table>");
+            con.close();
+        } catch (SQLException e1) {
+            html.append("访问数据库错误-2");
+        }
+        m.addObject("html", html);
+        m.setViewName("updatebyxf021");
+        return m;
+    }
+
+    @PostMapping("/updateStudent")
+    public ModelAndView updateStudent(String id, String schoolClass, ModelAndView m) throws SQLException, UnsupportedEncodingException {
+
+        System.out.println(111);
+        Connection con = null;
+        PreparedStatement preparedStatement;
+        ResultSet rs = null;
+        String html = "";
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html = "连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            String condition = "UPDATE 学生 SET 班级=? where 学号=?";
+            preparedStatement = con.prepareStatement(condition);
+            preparedStatement.setString(1, schoolClass);
+            preparedStatement.setString(2, id);
+            //执行更新操作：
+            preparedStatement.executeUpdate();
+            con.close();
+        } catch (SQLException e) {
+            html = "访问数据库错误-2";
+        }
+
+        m.addObject("html", html);
+        m.setViewName("redirect:/editStudent");
+        return m;
+    }
+
 
     @PostMapping("/addLesson")
     public String addLesson(String cid, String name, String time, String credit, String type, Model m) throws SQLException {
