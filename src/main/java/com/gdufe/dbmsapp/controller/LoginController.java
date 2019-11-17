@@ -368,6 +368,32 @@ public class LoginController {
         return "byxf01";
     }
 
+    @PostMapping("/addLesson")
+    public String addLesson(String cid, String name, String time, String credit, String type, Model m) throws SQLException {
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        String html;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html = "连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181;useUnicode=true;characterEncoding=UTF-8", "root", "123456");
+            sql = con.createStatement();
+            String condition = "INSERT INTO 课程 VALUES('" + cid + "','" + name + "','" + time + "','" + credit + "','" + type + "')";
+            sql.executeUpdate(condition); //执行添加操作：
+            html = "成功de增加了一笔记录";
+            con.close();
+        } catch (SQLException event) {
+            html = "学号或者课程编号有错。";
+        }
+        m.addAttribute("html", html);
+        return "byxf01";
+    }
+
+
 }
 
 

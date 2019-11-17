@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>无标题文档</title>
+    <style type="text/css">
+        <!--
+        body, td, th {
+            font-family: 黑体;
+            font-size: 24px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        body {
+            background-color: #FFFFFF;
+        }
+
+        #Layer1 {
+            position: absolute;
+            left: 126px;
+            top: 108px;
+            width: 376px;
+            height: 127px;
+            z-index: 1;
+        }
+
+        -->
+    </style>
+</head>
+
+<body>
+<p>&nbsp;</p>
+<table width="779" border="6" align="center">
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <div align="center">课程表【增加记录】</div>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <form id="form1" name="form1" method="post" action="/addLesson">
+                <p align="center">课程编号：
+                    <input name="cid" type="text" id="cid" style="font-size:24px" size="20"/>
+                </p>
+                <p align="center">课程名称：
+                    <input name="name" type="text" id="name" size="20" style="font-size:24px"/>
+                </p>
+                <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;课时：
+                    <input name="time" type="text" id="time" size="20" style="font-size:24px"/>
+                </p>
+                <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;学分：
+                    <input name="credit" type="text" id="credit" size="20" style="font-size:24px"/>
+                </p>
+                <p align="center">课程类别：
+                    <input name="type" type="text" id="type" size="20" style="font-size:24px"/>
+                </p>
+                <p>
+                    <label>
+                        <div align="center">
+                            <div align="center">
+                                <input type="submit" name="Submit" value="提交更新" style="font-size:24px"/>
+                            </div>
+                        </div>
+                    </label>
+            </form>
+        </td>
+        <td>&nbsp;</td>
+    </tr>
+</table>
+</body>
+</html>
