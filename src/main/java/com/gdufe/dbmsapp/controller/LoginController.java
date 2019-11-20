@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
@@ -52,7 +51,7 @@ public class LoginController {
     }
 
     @PostMapping("/byxf01")
-    public String add(String t1, String t2, Model m) throws SQLException {
+    public String add(String t1, String t2, Model m) {
         Connection con = null;
         Statement sql = null;
         ResultSet rs = null;
@@ -77,7 +76,7 @@ public class LoginController {
     }
 
     @PostMapping("/byxf04")
-    public String search(String t1, Model m) throws SQLException, UnsupportedEncodingException {
+    public String search(String t1, Model m){
         Connection con = null;
         Statement sql = null;
         ResultSet rs = null;
@@ -116,7 +115,7 @@ public class LoginController {
 
 
     @PostMapping("/piechartbyxf")
-    public String caculate(String t1, Model m) throws SQLException, UnsupportedEncodingException {
+    public String caculate(String t1, Model m){
 //        Connection con=null;
 //        Statement sql=null;
 //        ResultSet rs=null;
@@ -194,7 +193,7 @@ public class LoginController {
     }
 
     @GetMapping("/deletebyxf031")
-    public String delete(Model m) throws SQLException, UnsupportedEncodingException {
+    public String delete(Model m){
         Connection con;
         Statement sql;
         ResultSet rs;
@@ -226,7 +225,7 @@ public class LoginController {
     }
 
     @PostMapping("/deletebyxf032")
-    public ModelAndView test(String t1, ModelAndView m) throws SQLException, UnsupportedEncodingException {
+    public ModelAndView test(String t1, ModelAndView m) {
         Connection con = null;
         Statement sql = null;
         ResultSet rs = null;
@@ -251,7 +250,7 @@ public class LoginController {
     }
 
     @GetMapping("/updatebyxf021")
-    public ModelAndView edit(ModelAndView m) throws SQLException, UnsupportedEncodingException {
+    public ModelAndView edit(ModelAndView m)  {
         Connection con;
         Statement sql;
         ResultSet rs;
