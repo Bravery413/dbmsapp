@@ -31,7 +31,7 @@ public class SqlserverGenerator {
 
     //数据库配置四要素
     private static String driverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    private static String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=stud1181";
+    private static String url = "jdbc:sqlserver://127.0.0.1:1433;databaseName=dbo";
     private static String username = "root";
     private static String password = "123456";
 

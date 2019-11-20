@@ -35,7 +35,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             String condition = null;
             condition = "SELECT * FROM 注册登录 WHERE 学号='" + number + "' AND 密码='" + password + "'";
@@ -69,14 +69,14 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181;useUnicode=true;characterEncoding=UTF-8", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo;useUnicode=true;characterEncoding=UTF-8", "sa", "Py123456");
             sql = con.createStatement();
             String condition = "INSERT INTO 毕业学分 VALUES('" + t1 + "'," + t2 + ")";
             sql.executeUpdate(condition); //执行添加操作：
             html = "成功de增加了一笔记录";
             con.close();
         } catch (SQLException event) {
-            html = "访问数据库错误-2，该课程类别已经被录入或数据填写超过8个字符。";
+            html = "访问数据库错误111-2，该课程类别已经被录入或数据填写超过8个字符。";
         }
         m.addAttribute("html", html);
         return "byxf01";
@@ -94,7 +94,7 @@ public class LoginController {
             html.append("访问数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "sa", "admins");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "admins");
             sql = con.createStatement();
             String condition = null;
             condition = "SELECT * FROM 毕业学分 WHERE 课程类别 like '%" + t1 + "%'";
@@ -129,7 +129,7 @@ public class LoginController {
 //        try{Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");}
 //        catch(ClassNotFoundException e){out.print("连接数据库错误-1");}
 //        try {
-//            con=DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181","sa","admins");
+//            con=DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo","sa","admins");
 //            sql=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 //            String condition="select count(课程类别) from 毕业学分";
 //            rs=sql.executeQuery(condition);
@@ -211,7 +211,7 @@ public class LoginController {
             html.append("连接数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             rs = sql.executeQuery("SELECT * FROM 毕业学分");
             html.append("<center>针对每条记录，按照“课程类别”修改“最低学分”</center><Table border='6' align='center'>");
@@ -243,7 +243,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             String condition1 = "DELETE 毕业学分  WHERE 课程类别='" + t1 + "'";
             //执行更新操作：
@@ -268,7 +268,7 @@ public class LoginController {
             html.append("连接数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             rs = sql.executeQuery("SELECT * FROM 毕业学分");
             html.append("<center>针对每条记录，按照“课程类别”修改“最低学分”</center><Table border='6' align='center'>");
@@ -302,7 +302,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "sa", "admins");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "admins");
             sql = con.createStatement();
             String condition1 = "UPDATE 毕业学分 SET 最低学分=" + t2 + " WHERE 课程类别='" + t1 + "'";
             //执行更新操作：
@@ -330,7 +330,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181;useUnicode=true;characterEncoding=UTF-8", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo;useUnicode=true;characterEncoding=UTF-8", "sa", "Py123456");
             sql = con.createStatement();
             String condition = "INSERT INTO 学生 VALUES('" + id + "','" + name + "','" + sex + "','" + date + "','" + type + "','" + home + "','" + schoolClass + "')";
             sql.executeUpdate(condition); //执行添加操作：
@@ -355,7 +355,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181;useUnicode=true;characterEncoding=UTF-8", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo;useUnicode=true;characterEncoding=UTF-8", "sa", "Py123456");
             sql = con.createStatement();
             String condition = "INSERT INTO 学习成绩 VALUES('" + id + "','" + cid + "','" + grade + "')";
             sql.executeUpdate(condition); //执行添加操作：
@@ -381,7 +381,7 @@ public class LoginController {
             html.append("连接数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             rs = sql.executeQuery("SELECT * FROM 学习成绩");
             html.append("<center>针对每条记录，按照“学生课程”修改“总评分”</center><Table border='6' align='center'>");
@@ -423,7 +423,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             String condition = "UPDATE 学习成绩 SET 总评分=? where 学号=? and 课程编号=?";
             preparedStatement = con.prepareStatement(condition);
             preparedStatement.setString(1, grade);
@@ -454,7 +454,7 @@ public class LoginController {
             html.append("连接数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             rs = sql.executeQuery("SELECT * FROM 课程");
             html.append("<center>针对每条记录，按照“课程”修改“课时”</center><Table border='6' align='center'>");
@@ -503,7 +503,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             String condition = "UPDATE 课程 SET 课时=? where 课程编号=?";
             preparedStatement = con.prepareStatement(condition);
             preparedStatement.setString(1, time);
@@ -533,7 +533,7 @@ public class LoginController {
             html.append("连接数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             sql = con.createStatement();
             rs = sql.executeQuery("SELECT * FROM 学生");
             html.append("<center>针对每条记录，按照“课程”修改“课时”</center><Table border='6' align='center'>");
@@ -583,7 +583,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo", "sa", "Py123456");
             String condition = "UPDATE 学生 SET 班级=? where 学号=?";
             preparedStatement = con.prepareStatement(condition);
             preparedStatement.setString(1, schoolClass);
@@ -613,7 +613,7 @@ public class LoginController {
             html = "连接数据库错误-1";
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;DatabaseName=stud1181;useUnicode=true;characterEncoding=UTF-8", "root", "123456");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo;useUnicode=true;characterEncoding=UTF-8", "sa", "Py123456");
             sql = con.createStatement();
             String condition = "INSERT INTO 课程 VALUES('" + cid + "','" + name + "','" + time + "','" + credit + "','" + type + "')";
             sql.executeUpdate(condition); //执行添加操作：
