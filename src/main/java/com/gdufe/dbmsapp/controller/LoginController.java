@@ -30,6 +30,13 @@ import java.text.NumberFormat;
 @Controller
 public class LoginController {
 
+
+    @GetMapping("/")
+    public String index() {
+        return "main1287";
+    }
+
+
     /**
      * 登录
      *

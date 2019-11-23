@@ -1,12 +1,13 @@
+
 spring:
-  datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:sqlserver://182.254.201.74:1433;databaseName=SQLS2345
-    username: sa
-    password: Py123456
-    application:
-      name: microservice-provider
+#  datasource:
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:sqlserver://182.254.201.74:1433;databaseName=SQLS2345
+#    username: sa
+#    password: Py123456
+#    application:
+#      name: microservice-provider
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -21,3 +22,5 @@ mybatis-plus:
       table-underline: true
       logic-not-delete-value: 0
       logic-delete-value: 1
+server:
+  port: 80
