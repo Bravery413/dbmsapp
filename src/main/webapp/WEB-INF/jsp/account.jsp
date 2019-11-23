@@ -3,6 +3,5 @@
 <HTML>
 <BODY>
 ${html}
-</FONT>
 </BODY>
 </HTML>

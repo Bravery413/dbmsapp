@@ -33,7 +33,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String index() {
-        return "main1287";
+        return "index";
     }
 
 
@@ -70,7 +70,7 @@ public class LoginController {
             if (flag == 1) {
                 html = "<a href='main1287.html' target='_parent'>账号正确进入【主功能】页面</a>";
             } else {
-                html = "<a href='login.html'>账号错误111，重新【登录】</a>";
+                html = "<a href='loginPage.html'>账号错误111，重新【登录】</a>";
             }
             con.close();
         } catch (SQLException event) {
@@ -104,6 +104,96 @@ public class LoginController {
         }
         m.addAttribute("html", html);
         return "register";
+
+    }
+
+    @GetMapping("/account")
+    public ModelAndView account(ModelAndView m) throws SQLException {
+
+        Connection con;
+        Statement sql;
+        ResultSet rs;
+        StringBuffer html = new StringBuffer();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html.append("连接数据库错误-1");
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "Py123456");
+            sql = con.createStatement();
+            rs = sql.executeQuery("SELECT * FROM 注册登录");
+            html.append("针对每行账号，按照“学号”修改“密码”<Table Border>");
+            String tmp = "";
+            while (rs.next()) {
+                tmp = rs.getString(1);
+                html.append("<tr><form id='form1' name='form1' method='post' action='updateAccount'><TD >学号：<label><input name='number' type='hidden' value='" + tmp + "' /></label>" + tmp + "</TD>");
+                html.append("<TD >密码：<label><input name='password' type='text' id='t2' value='" + rs.getString(2) + "' size='20' /></label></TD>");
+                html.append("<TD ><br><label><input type='submit' name='Submit' value='修改密码并提交' /></label></form></tr>");
+                html.append("<tr><form id='form2' name='form2' method='post' action='/deleteAccount'><TD >学号：<label><input name='number' type='hidden' value='" + tmp + "' /></label>" + tmp + "</TD>");
+                html.append("<TD >密码：<label><input name='password' type='text' id='password' value='" + rs.getString(2) + "' size='20' /></label></TD>");
+                html.append("<TD ><br><label><input type='submit' name='Submit' value='删除该账号' /></label></form></tr>");
+            }
+            html.append("</Table>");
+            con.close();
+        } catch (SQLException e1) {
+            html.append("访问数据库错误-2");
+        }
+        m.setViewName("account");
+        m.addObject("html", html);
+        return m;
+    }
+
+    @PostMapping("/updateAccount")
+    public ModelAndView updateAccount(String number, String password, ModelAndView m) throws SQLException {
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        String html = "";
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html = "连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "Py123456");
+            sql = con.createStatement();
+            String condition1 = "UPDATE 注册登录 SET 密码='" + password + "' WHERE 学号='" + number + "'";
+            //执行更新操作：
+            sql.executeUpdate(condition1);
+            con.close();
+        } catch (SQLException e) {
+            html = "访问数据库错误-2";
+        }
+        m.addObject("html", html);
+        m.setViewName("redirect:/account");
+        return m;
+    }
+
+    @PostMapping("/deleteAccount")
+    public ModelAndView deleteAccount(String number, ModelAndView m) throws SQLException {
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        String html = "";
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html = "连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "Py123456");
+            sql = con.createStatement();
+            String condition1 = "DELETE 注册登录  WHERE 学号='" + number + "'";
+            //执行更新操作：
+            sql.executeUpdate(condition1);
+            con.close();
+        } catch (SQLException e) {
+            html = "访问数据库错误-2";
+        }
+        m.setViewName("redirect:/account");
+        m.addObject("html", html);
+        return m;
 
     }
 
@@ -195,20 +285,6 @@ public class LoginController {
                 ChartUtilities.writeChartAsJPEG(fos_jpg, 100, chart, 640, 480, null);
             } catch (Exception e) {
             }
-
-
-//            String filename = ServletUtilities.saveChartAsPNG(chart, 500, 300,
-//                    null, session);
-//            String graphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + filename;
-//
-//            //    <body>
-//            //        <center> <img src="<%=graphURL%>" width=500 height=300 border=0 usemap="#<%= filename %>"></center>
-//            //     </body>
-//            html.append("<body>");
-//            html.append("<center> <img src=" + graphURL + "+ width=500 height=300 border=0 usemap=" + filename + "></center>");
-//            html.append("</body>");
-//            m.addObject("html", html);
-//            m.setViewName("piechartbyxf");
             return m;
         } catch (Exception e) {
             System.out.println(2222);
