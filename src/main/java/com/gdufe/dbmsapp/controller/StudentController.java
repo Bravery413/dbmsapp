@@ -216,5 +216,61 @@ public class StudentController {
         return m;
     }
 
+    /**
+     * 查询
+     * @param t1
+     * @param m
+     * @return
+     */
+    @PostMapping("/searchStudent")
+    public String search(String t1, Model m){
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        StringBuffer html = new StringBuffer();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html.append("访问数据库错误-1");
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "Py123456");
+            sql = con.createStatement();
+            String condition = null;
+            condition = "SELECT * FROM 学生 WHERE 姓名 like '%" + t1 + "%'";
+            rs = sql.executeQuery(condition);
+            html.append("<table width='779' border='6' align='center'>");
+            html.append("<tr>");
+            html.append("<td>学号</td>");
+            html.append("<td>姓名</td>");
+            html.append("<td>性别</td>");
+            html.append("<td>出生日期</td>");
+            html.append("<td>籍贯</td>");
+            html.append("<td>家庭住址</td>");
+            html.append("<td>班级</td>");
+            html.append("</tr>");
+            while (rs.next()) {
+                html.append("<tr>");
+                html.append("<TD >" + rs.getString(1) + "</TD>");
+                html.append("<TD >" + rs.getString(2) + "</TD>");
+                html.append("<TD >" + rs.getString(3) + "</TD>");
+                html.append("<TD >" + rs.getString(4) + "</TD>");
+                html.append("<TD >" + rs.getString(5) + "</TD>");
+                html.append("<TD >" + rs.getString(6) + "</TD>");
+                html.append("<TD >" + rs.getString(7) + "</TD>");
+                html.append("</tr>");
+            }
+            html.append("</Table>");
+            con.close();
+            m.addAttribute("html", html);
+
+        } catch (SQLException event) {
+            html.append("访问数据库错误-2");
+        }
+        return "byxf04";
+    }
+
+
+
 
 }

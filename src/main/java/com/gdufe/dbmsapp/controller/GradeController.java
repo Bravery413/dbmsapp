@@ -199,7 +199,7 @@ public class GradeController {
      * @param m
      * @return
      */
-    @PostMapping("/byxf04111")
+    @PostMapping("/searchGrade")
     public String search(String t1, Model m){
         Connection con = null;
         Statement sql = null;
@@ -211,20 +211,20 @@ public class GradeController {
             html.append("访问数据库错误-1");
         }
         try {
-            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "admins");
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "Py123456");
             sql = con.createStatement();
             String condition = null;
-            condition = "SELECT * FROM 专业计划 WHERE 课程类别 like '%" + t1 + "%'";
+            condition = "SELECT * FROM 学习成绩 WHERE 课程编号 like '%" + t1 + "%'";
             rs = sql.executeQuery(condition);
             html.append("<table width='779' border='6' align='center'>");
             html.append("<tr>");
-            html.append("<td>课程类别</td>");
-            html.append("<td>最低学分</td>");
+            html.append("<td>课程编号</td>");
+            html.append("<td>成绩</td>");
             html.append("</tr>");
             while (rs.next()) {
                 html.append("<tr>");
-                html.append("<TD >" + rs.getString(1) + "</TD>");
                 html.append("<TD >" + rs.getString(2) + "</TD>");
+                html.append("<TD >" + rs.getString(3) + "</TD>");
                 html.append("</tr>");
             }
             html.append("</Table>");
