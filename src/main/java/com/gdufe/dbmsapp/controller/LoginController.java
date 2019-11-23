@@ -2,10 +2,7 @@ package com.gdufe.dbmsapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
-import java.io.UnsupportedEncodingException;
 import java.sql.*;
 
 /**
@@ -57,6 +54,34 @@ public class LoginController {
         m.addAttribute("html", html);
         return "login";
     }
+
+
+    @PostMapping("/register")
+    public String register(String number, String password, Model m) throws SQLException {
+        Connection con = null;
+        Statement sql = null;
+        ResultSet rs = null;
+        String html;
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        } catch (ClassNotFoundException event) {
+            html="连接数据库错误-1";
+        }
+        try {
+            con = DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345", "sa", "Py123456");
+            sql = con.createStatement();
+            String condition = "INSERT INTO 注册登录 VALUES('" + number + "','" + password + "')";
+            sql.executeUpdate(condition); //执行添加操作：
+            html ="注册成功，可以利用该账号登录系统啦。";
+            con.close();
+        } catch (SQLException event) {
+            html="访问数据库错误-2，该学号已经被注册或数据填写太多。";
+        }
+        m.addAttribute("html", html);
+        return "register";
+
+    }
+
 
 
     /**

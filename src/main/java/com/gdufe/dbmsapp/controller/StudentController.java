@@ -104,8 +104,6 @@ public class StudentController {
      */
     @PostMapping("/updateStudent")
     public ModelAndView updateStudent(String id, String schoolClass, ModelAndView m) throws SQLException, UnsupportedEncodingException {
-
-        System.out.println(111);
         Connection con = null;
         PreparedStatement preparedStatement;
         ResultSet rs = null;

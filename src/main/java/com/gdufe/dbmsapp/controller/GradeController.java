@@ -44,7 +44,6 @@ public class GradeController {
 
     @GetMapping("/editGrade")
     public ModelAndView editGrade(ModelAndView m) {
-        System.out.println(111);
         Connection con = null;
         Statement sql = null;
         ResultSet rs = null;

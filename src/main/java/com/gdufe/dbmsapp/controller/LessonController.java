@@ -118,8 +118,6 @@ public class LessonController {
      */
     @PostMapping("/updateLesson")
     public ModelAndView updateLesson(String cid, String time, ModelAndView m) throws SQLException, UnsupportedEncodingException {
-
-        System.out.println(111);
         Connection con = null;
         PreparedStatement preparedStatement;
         ResultSet rs = null;
