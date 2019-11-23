@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-    <title>HanZaiXue1287学分-绩点管理系统</title>
+    <title>Huangshan2345学分-绩点管理系统</title>
 </head>
 <frameset rows="80,*" frameborder="no" border="0" framespacing="0">
     <frame src="in1.html" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame"/>

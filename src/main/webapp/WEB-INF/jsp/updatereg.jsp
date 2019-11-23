@@ -7,7 +7,7 @@
     ResultSet rs;
        try{Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver"); }
        catch(ClassNotFoundException event){out.print("连接数据库错误-1");}
-    try {  con=DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=dbo","sa","admins");
+    try {  con=DriverManager.getConnection("jdbc:sqlserver://182.254.201.74:1433;DatabaseName=SQLS2345","sa","admins");
          sql=con.createStatement();
          rs=sql.executeQuery("SELECT * FROM 注册登录");
          out.print("针对每行账号，按照“学号”修改“密码”<Table Border>"); 

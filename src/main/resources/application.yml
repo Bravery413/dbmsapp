@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:sqlserver://182.254.201.74:1433;databaseName=dbo
+    url: jdbc:sqlserver://182.254.201.74:1433;databaseName=SQLS2345
     username: sa
     password: Py123456
     application:
